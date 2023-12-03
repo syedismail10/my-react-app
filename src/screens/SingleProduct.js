@@ -1,9 +1,19 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Header from '../components/Header'
-import Rating from '../components/homeComponents/Rating'
-import { Link } from 'react-router-dom'
-import Message from './../components/LoadingError/Error'
+// import Rating from '../components/homeComponents/Rating'
+// import { Link } from 'react-router-dom'
+// import Message from './../components/LoadingError/Error'
+import {useState } from 'react'
+import axios from 'axios'
 
+<<<<<<< HEAD
+const SingleProduct = ({match}) => {
+  // const product will be added with backend service
+  const [product,setProduct] = useState()
+  useEffect(() => {
+    axios.get('http://localhost:8081/product').then(res => setProduct(res.data)).catch(err=> console.log(err)).catch(err => console.log(err))
+  })
+=======
 
 const SingleProduct = ({history,match}) => {
   const [qty,setQty]= useState(1)
@@ -24,6 +34,7 @@ const AddToCartHandle=(e)=> {
   history.push(`/cart/${productId}?qty=${qty}`);
 };
   
+>>>>>>> ae3e36b1ed5d51c76e3a4e75e421bfef89e62f30
   return (
     <>
       <Header/>
