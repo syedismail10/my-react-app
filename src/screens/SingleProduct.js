@@ -1,10 +1,12 @@
-import React, { useEffect } from 'react'
+import React, {useDispatch,useSelector, useState,useEffect } from 'react'
 import Header from '../components/Header'
+import {useState } from 'react'
+import axios from 'axios'
+
 // import Rating from '../components/homeComponents/Rating'
 // import { Link } from 'react-router-dom'
 // import Message from './../components/LoadingError/Error'
-import {useState } from 'react'
-import axios from 'axios'
+
 
 const SingleProduct = ({match}) => {
   // const product will be added with backend service
@@ -27,10 +29,10 @@ const SingleProduct = ({history,match}) => {
     dispatch(listProductDetails(productId));
   }, [dispatch,productId]);
   
-const AddToCartHandle=(e)=> {
-  e.preventDefault();
-  history.push(`/cart/${productId}?qty=${qty}`);
-};
+  const AddToCartHandle=(e)=> {
+    e.preventDefault();
+    history.push(`/cart/${productId}?qty=${qty}`);
+  };
   
   return (
     <>

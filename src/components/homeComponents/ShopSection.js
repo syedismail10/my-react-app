@@ -1,10 +1,18 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import Rating from './Rating'
 import Pagination from './pagination'
+import axios from 'axios'
 // import products from '../../data/Products'
 const ShopSection = () =>{
-    const products = []
+    const [products,setProducts] = useState([])
+    useEffect(()=> {
+        const fetchproducts = async() => {
+            const {data} = await axios.get('/products')
+            setProducts(data);
+        }
+        fetchproducts()
+    })
 
     // const getProducts = () => {
     //     // axios query to fetch
