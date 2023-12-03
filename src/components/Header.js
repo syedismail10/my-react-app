@@ -1,5 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import logo from '../images/shoes-store.png';
+
 const Header = () => {
   return (
     <div>
@@ -7,19 +9,22 @@ const Header = () => {
         <div className="Announcement">
             <div className="container">
                 <div className="row">
-                    <p></p>
-                    <p></p>
-                </div>
-                <div className="col-12 col-lg-6 justify-content-center justify-content-lg">
+                    <div className="col-md-6 d-flex align-ietms-center display-none">
+                        <p>abc</p>
+                        <p>def</p>
+                    </div>
+                    <div className="col-12 col-lg-6 justify-content-center justify-content-lg-end d-flex align-items-center">
                     <Link to = ''>
                         <i className="fab fa-facebook-f"></i>
                     </Link>
                     <Link to = ''>
                         <i className="fab fa-instagram"></i>
                     </Link>
+                    </div>
                 </div>
             </div>
         </div>
+        {/* Header */}
         <div className="header">
             <div className="container">
                 {/* {mobile header} */}
@@ -28,10 +33,10 @@ const Header = () => {
                         <div className="row">
                             <div className="col-6 d-flex align-items-center">
                                 <Link className='navbar-brand' to='/'>
-                                    <img src="/images/logo.png" alt="logo" />
+                                    <img src='{logo}' alt="logo" />
                                 </Link>
                             </div>
-                            <div className="col-6 d-flex align-items-center justify-conetent-end Logo">
+                            <div className="col-6 d-flex align-items-center justify-conetent-end Login-Register">
                                 <div className="btn-group">
                                     <button
                                     type="button"
@@ -68,7 +73,7 @@ const Header = () => {
                     <div className="row">
                         <div className="col-md-3 col-4 d-flex align-items-center">
                             <Link className='navbar-brand' to= '/'>
-                                <img src="" alt="logo" />
+                                <img src={logo} alt="logo" className='header-logo'/>
                             </Link>
                         </div>
                         <div className="col-md-6 col-8 d-flex align-items-center">
@@ -77,7 +82,7 @@ const Header = () => {
                                 <button type="submit" className='search-button'>Search</button>
                             </form>
                         </div>
-                        <div className="col-md-3 d-flex align-items-center justify-content-end">
+                        <div className="col-md-3 d-flex align-items-center justify-content-end Login-Register">
                             <div className="btn-group">
                                 <button type="button" className="name-button dropdown-toggle"
                                 data-toggle = 'dropdown'

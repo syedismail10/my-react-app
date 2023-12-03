@@ -5,6 +5,11 @@ import Pagination from './pagination'
 // import products from '../../data/Products'
 const ShopSection = () =>{
     const products = []
+
+    // const getProducts = () => {
+    //     // axios query to fetch
+    //     // save to products
+    // } 
   return (
     <div className='container'>
         <div className=''>
