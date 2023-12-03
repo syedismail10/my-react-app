@@ -1,13 +1,17 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Header from '../components/Header'
-import Rating from '../components/homeComponents/Rating'
-import { Link } from 'react-router-dom'
-import Message from './../components/LoadingError/Error'
+// import Rating from '../components/homeComponents/Rating'
+// import { Link } from 'react-router-dom'
+// import Message from './../components/LoadingError/Error'
+import {useState } from 'react'
+import axios from 'axios'
 
-
-const SingleProduct = () => {
+const SingleProduct = ({match}) => {
   // const product will be added with backend service
-  const product= []
+  const [product,setProduct] = useState()
+  useEffect(() => {
+    axios.get('http://localhost:8081/product').then(res => setProduct(res.data)).catch(err=> console.log(err)).catch(err => console.log(err))
+  })
   return (
     <>
       <Header/>

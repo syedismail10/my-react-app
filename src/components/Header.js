@@ -10,8 +10,8 @@ const Header = () => {
             <div className="container">
                 <div className="row">
                     <div className="col-md-6 d-flex align-ietms-center display-none">
-                        <p>abc</p>
-                        <p>def</p>
+                        <p></p>
+                        <p></p>
                     </div>
                     <div className="col-12 col-lg-6 justify-content-center justify-content-lg-end d-flex align-items-center">
                     <Link to = ''>
