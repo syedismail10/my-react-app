@@ -1,24 +1,26 @@
 import React, {useDispatch,useSelector, useState,useEffect } from 'react'
 import Header from '../components/Header'
-import {useState } from 'react'
 import axios from 'axios'
 
 // import Rating from '../components/homeComponents/Rating'
 // import { Link } from 'react-router-dom'
 // import Message from './../components/LoadingError/Error'
 
-
-const SingleProduct = ({match}) => {
-  // const product will be added with backend service
-  const [product,setProduct] = useState()
-  useEffect(() => {
-    axios.get('http://localhost:8081/product').then(res => setProduct(res.data)).catch(err=> console.log(err)).catch(err => console.log(err))
-  })
+// const product will be added with backend service
+  
 
 const SingleProduct = ({history,match}) => {
-  const [qty,setQty]= useState(1)
+  const [quantity,setQuantity]= useState(1)
   //const product will be added with backend service
-  
+  const [product,setProduct] = useState()
+  useEffect(() => {
+    const fetchproduct = async () => {
+      const {data} = await axios.get(`/products/${match.params.id}`);
+      setProduct(data)
+    }
+    fetchproduct()
+  },[match])
+
   const productId = match.params.id;
   const dispatch = useDispatch();
 
@@ -31,7 +33,7 @@ const SingleProduct = ({history,match}) => {
   
   const AddToCartHandle=(e)=> {
     e.preventDefault();
-    history.push(`/cart/${productId}?qty=${qty}`);
+    history.push(`/cart/${productId}?qty=${quantity}`);
   };
   
   return (
@@ -88,5 +90,5 @@ const SingleProduct = ({history,match}) => {
     </>
   )
 }
-}
+
 export default SingleProduct

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useState,useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import Rating from './Rating'
 import Pagination from './pagination'
@@ -29,20 +29,19 @@ const ShopSection = () =>{
                                 <div className="shop col-lg-4 col-md-6 col-sm-6"
                                 key = {product._id}>
                                     <div className="border-product">
-                                        <Link to = {'/products/${product._id}'}>
+                                        <Link to = {`/products/${product._id}`}>
                                             <div className="shopBack">
                                                 <img src={product.image} alt = {product.name}/>
                                             </div>
                                         </Link>
                                         <div className="shoptext">
                                             <p>
-                                                <Link to ={'/products/${product._id}'}>
+                                                <Link to ={`/products/${product._id}`}>
                                                     {product.name}
                                                 </Link>
                                             </p>
-                                            <Rating value = {product.rating}
-                                            text = {'${product.numReviews} reviews'}
-                                            />
+                                            <h2>Item Description</h2>
+                                            <p> {product.description}</p>
                                             <h3>${product.price}</h3>
                                         </div>
                                     </div>
