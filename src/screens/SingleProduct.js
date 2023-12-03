@@ -5,9 +5,25 @@ import { Link } from 'react-router-dom'
 import Message from './../components/LoadingError/Error'
 
 
-const SingleProduct = () => {
-  // const product will be added with backend service
-  const product= []
+const SingleProduct = ({history,match}) => {
+  const [qty,setQty]= useState(1)
+  //const product will be added with backend service
+  
+  const productId = match.params.id;
+  const dispatch = useDispatch();
+
+  const productDetails = useSelector((state)=> state.productDetails);
+  const {loading,error,product} = productDetails;
+
+  useEffect(() => {
+    dispatch(listProductDetails(productId));
+  }, [dispatch,productId]);
+  
+const AddToCartHandle=(e)=> {
+  e.preventDefault();
+  history.push(`/cart/${productId}?qty=${qty}`);
+};
+  
   return (
     <>
       <Header/>
@@ -42,14 +58,14 @@ const SingleProduct = () => {
                     {product.quantity > 0 ? (
                       <>
                       <div className="flex-box d-flex justify-content-between align-items-center">
-                        <h6>quantity</h6>
+                        <h6>status</h6>
                         <select>
                           {[...Array(product.quantity).keys()].map((x) => (
                             <option key = {x + 1} value={ x+1}>{x+1}</option>
                           ))}
                         </select>
                       </div>
-                      <button className="round-black-btn">Add to Cart</button>
+                      <button onClick={AddToCartHandle} className="round-black-btn">Add to Cart</button>
                       </>
                     ):null}
                   </div>
