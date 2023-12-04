@@ -1,39 +1,64 @@
 import React from 'react';
 import './App.css';
-import './responsive.css'
-import 'react-toastify/dist/ReactToastify.css'
-import {BrowserRouter as Router,Routes,Route} from 'react-router-dom';
-import HomeScreen from './screens/HomeScreen.js';
-import SingleProduct from './screens/SingleProduct.js';
-import Login from './screens/Login.js';
-import Register from './screens/Register.js';
-import CartScreen from './screens/CartScreen.js';
-import ShippingScreen from './screens/ShippingScreen.js';
-import ProfileScreen from './screens/ProfileScreen.js';
-import PaymentScreen from './screens/PaymentScreen.js';
-import PlaceOrderScreen from './screens/PlaceOrderScreen.js';
-import OrderScreen from './screens/OrderScreen.js';
-import NotFound from './screens/NotFound.js';
-// import Product from './Product.js';
-// import AddProduct from './AddProduct.js';
+import './responsive.css';
+import 'react-toastify/dist/ReactToastify.css';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import HomeScreen from './screens/HomeScreen';
+import SingleProduct from './screens/SingleProduct';
+import Login from './screens/Login';
+import Register from './screens/Register';
+import CartScreen from './screens/CartScreen';
+import ShippingScreen from './screens/ShippingScreen';
+import ProfileScreen from './screens/ProfileScreen';
+import PaymentScreen from './screens/PaymentScreen';
+import PlaceOrderScreen from './screens/PlaceOrderScreen';
+import OrderScreen from './screens/OrderScreen';
+import NotFound from './screens/NotFound';
+import PrivateRoute from './PrivateRouter.js'; // Updated import
 
 function App() {
   return (
-    <Router>
-      <Routes>
-        <Route path= '/' Component={HomeScreen} exact></Route>
-        <Route path= '/products/:id' Component={SingleProduct} ></Route>
-        <Route path= '/login' Component={Login} ></Route>
-        <Route path= '/register' Component={Register} ></Route>
-        <Route path= '/profile' Component={ProfileScreen} ></Route>
-        <Route path= '/cart/:id?' Component={CartScreen} ></Route>
-        <Route path= '/shipping' Component={ShippingScreen} ></Route>
-        <Route path= '/payment' Component={PaymentScreen} ></Route>
-        <Route path= '/placeorder' Component={PlaceOrderScreen} ></Route>
-        <Route path= '/order' Component={OrderScreen} ></Route>
-        <Route path= '*' Component={NotFound} ></Route>
-      </Routes>
-    </Router>
+    <>
+      <Router>
+        <Routes>
+          <Route path="/" element={<HomeScreen />} />
+          <Route path="/search/:keyword" element={<HomeScreen />} />
+          <Route path="/page/:pagenumber" element={<HomeScreen />} />
+          <Route path="/search/:keyword/page/:pageNumber" element={<HomeScreen />} />
+          <Route path="/products/:id" element={<SingleProduct />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/cart/:id?" element={<CartScreen />} />
+          <Route path="*" element={<NotFound />} />
+          {/* Private Routes */}
+          <Route path="/profile" element={
+            <PrivateRoute>
+              <ProfileScreen />
+            </PrivateRoute>
+          }/>
+          <Route path="/shipping" element={
+            <PrivateRoute>
+              <ShippingScreen />
+            </PrivateRoute>
+          }/>
+          <Route path="/payment" element={
+            <PrivateRoute>
+              <PaymentScreen />
+            </PrivateRoute>
+          }/>
+          <Route path="/placeorder" element={
+            <PrivateRoute>
+              <PlaceOrderScreen />
+            </PrivateRoute>
+          }/>
+          <Route path="/order/:id" element={
+            <PrivateRoute>
+              <OrderScreen />
+            </PrivateRoute>
+          }/>
+        </Routes>
+      </Router>
+    </>
   );
 }
 
