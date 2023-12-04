@@ -19,7 +19,7 @@ const Footer = () => {
           <div className="card-name">
             <img
               alt="paypal"
-              src="https://pbs.twimg.com/media/EfTZlEnWAAMn1lX.png"
+              src="https://www.paypalobjects.com/digitalassets/c/website/marketing/apac/C2/logos-buttons/optimize/26_Grey_PayPal_Pill_Button.png"
             />
           </div>
           <div className="card-name">

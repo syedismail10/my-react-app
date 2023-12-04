@@ -1,5 +1,7 @@
 import React from 'react'
 
+// can skip this part
+
 const Rating= ({value,text}) =>{
   return (
     <div className='rating'>

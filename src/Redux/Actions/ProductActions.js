@@ -1,4 +1,4 @@
-import axios from "../../http";
+import axios from "axios";
 import {
   PRODUCT_CREATE_REVIEW_FAIL,
   PRODUCT_CREATE_REVIEW_REQUEST,
@@ -9,7 +9,7 @@ import {
   PRODUCT_LIST_FAIL,
   PRODUCT_LIST_REQUEST,
   PRODUCT_LIST_SUCCESS,
-} from "../Constants/ProductConstants";
+} from "../Constants/ProductConstants.js";
 import { logout } from "./userActions";
 
 // PRODUCT LIST
