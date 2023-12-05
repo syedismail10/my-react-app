@@ -8,7 +8,7 @@ const ShopSection = () =>{
     const [products,setProducts] = useState([])
     useEffect(()=> {
         const fetchproducts = async() => {
-            const {data} = await axios.get('/api/products')
+            const {data} = await axios.get('/api/products/')
             setProducts(data);
         }
         fetchproducts()
