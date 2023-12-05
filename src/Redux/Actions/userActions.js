@@ -16,6 +16,8 @@ import {
   } from '../Constants/UserConstants.js'
   import axios from "axios";
   import { ORDER_LIST_MY_RESET } from "../Constants/OrderConstants.js";
+  import Login from '../../screens/Login.js';
+import { Navigate } from 'react-router-dom';
   
   // LOGIN
   export const login = (email, password) => async (dispatch) => {
@@ -29,7 +31,7 @@ import {
       };
   
       const { data } = await axios.post(
-        `/api/users/login`,
+        `/api/customer/login`,
         { email, password },
         config
       );
@@ -70,12 +72,17 @@ import {
         `http://localhost:8081/api/customer/register`,
         { name, email, password,ph_num,address, city },
         config
-      );
+      ).then((data)=>{
+        // code for login
+        // login(email,password)
+        Navigate('/login')
+      });
       dispatch({ type: USER_REGISTER_SUCCESS, payload: data });
       dispatch({ type: USER_LOGIN_SUCCESS, payload: data });
   
       localStorage.setItem("userInfo", JSON.stringify(data));
     } catch (error) {
+      console.log(error)
       dispatch({
         type: USER_REGISTER_FAIL,
         payload:

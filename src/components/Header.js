@@ -21,9 +21,9 @@ const Header = () => {
   const submitHandler = (e) => {
     e.preventDefault();
     if (keyword.trim()) {
-      history.push(`/search/${keyword}`);
+      history(`/search/${keyword}`);
     } else {
-      history.push("/");
+      history("/");
     }
   };
   return (
@@ -78,7 +78,7 @@ const Header = () => {
                         aria-haspopup="true"
                         aria-expanded="false"
                       >
-                        <i class="fas fa-user"></i>
+                        <i className="fas fa-user"></i>
                       </button>
                       <div className="dropdown-menu">
                         <Link className="dropdown-item" to="/profile">
@@ -103,7 +103,7 @@ const Header = () => {
                         aria-haspopup="true"
                         aria-expanded="false"
                       >
-                        <i class="fas fa-user"></i>
+                        <i className="fas fa-user"></i>
                       </button>
                       <div className="dropdown-menu">
                         <Link className="dropdown-item" to="/login">
