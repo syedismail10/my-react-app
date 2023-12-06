@@ -13,7 +13,7 @@ const Register = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [ph_num, setPhoneNum] = useState("");
-  const [amt_spend, setAmtSpend] = useState("0");
+  const [amt_spend, setAmtSpend] = useState("");
   const [address, setAddress] = useState("");
   const [city, setCity] = useState("");
 
@@ -35,6 +35,7 @@ const Register = () => {
     e.preventDefault();
     setAmtSpend(0)
     dispatch(register(name, email, password,ph_num,address,city,amt_spend));
+    console.log(userInfo)
   };
 
   return (
@@ -50,13 +51,13 @@ const Register = () => {
         >
           <input
             type="text"
-            placeholder="name"
+            placeholder="Name"
             value={name}
             onChange={(e) => setName(e.target.value)}
           />
           <input
             type="email"
-            placeholder="email"
+            placeholder="Email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />

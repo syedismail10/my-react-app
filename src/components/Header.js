@@ -1,8 +1,9 @@
 import React, { useState } from "react";
-import { Link, useNavigate} from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../Redux/Actions/userActions";
 import logo from '../images/shoes-store.png';
+
 
 const Header = () => {
   const [keyword, setKeyword] = useState();
@@ -12,8 +13,8 @@ const Header = () => {
   const cart = useSelector((state) => state.cart);
   const { cartItems } = cart;
   const userLogin = useSelector((state) => state.userLogin);
-  const { userInfo } = userLogin;
-
+  let { userInfo } = userLogin;
+  userInfo = false;
   const logoutHandler = () => {
     dispatch(logout());
   };
@@ -65,7 +66,7 @@ const Header = () => {
               <div className="row ">
                 <div className="col-6 d-flex align-items-center">
                   <Link className="navbar-brand" to="/">
-                    <img alt="logo" src='{logo}' />
+                    <img alt="logo" src={logo} />
                   </Link>
                 </div>
                 <div className="col-6 d-flex align-items-center justify-content-end Login-Register">
@@ -188,8 +189,8 @@ const Header = () => {
                   </div>
                 ) : (
                   <>
-                    <Link to="/register">Register</Link>
-                    <Link to="/login">Login</Link>
+                    <Link to="/register" className="dropdown-item-text">Register</Link>
+                    <Link to="/login" className="dropdown-item-text">Login</Link>
                   </>
                 )}
 

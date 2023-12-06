@@ -15,6 +15,7 @@ import PlaceOrderScreen from './screens/PlaceOrderScreen';
 import OrderScreen from './screens/OrderScreen';
 import NotFound from './screens/NotFound';
 import PrivateRoute from './PrivateRouter.js'; // Updated import
+import AddProduct from './AddProduct.js';
 
 function App() {
   return (
@@ -30,6 +31,8 @@ function App() {
           <Route path="/register" element={<Register />} />
           <Route path="/cart/:id?" element={<CartScreen />} />
           <Route path="*" element={<NotFound />} />
+          {/* testing product with images */}
+          <Route path= '/createProduct' element = {<AddProduct/>} />
           {/* Private Routes */}
           <Route path="/profile" element={
             <PrivateRoute>

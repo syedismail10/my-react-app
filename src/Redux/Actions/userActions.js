@@ -31,7 +31,7 @@ import { Navigate } from 'react-router-dom';
       };
   
       const { data } = await axios.post(
-        `/api/customer/login`,
+        `http://localhost:8081/api/customer/login`,
         { email, password },
         config
       );
@@ -58,7 +58,7 @@ import { Navigate } from 'react-router-dom';
   };
   
   // REGISTER
-  export const register = (name,email, password,ph_num,address,city) => async (dispatch) => {
+  export const register = (name,email, password,ph_num,address,city,amt_spend) => async (dispatch) => {
     try {
       dispatch({ type: USER_REGISTER_REQUEST });
   
@@ -67,19 +67,13 @@ import { Navigate } from 'react-router-dom';
           "Content-Type": "application/json",
         },
       };
-  
       const { data } = await axios.post(
         `http://localhost:8081/api/customer/register`,
-        { name, email, password,ph_num,address, city },
+        { name, email, password,ph_num,address, city,amt_spend},
         config
-      ).then((data)=>{
-        // code for login
-        // login(email,password)
-        Navigate('/login')
-      });
+      );
       dispatch({ type: USER_REGISTER_SUCCESS, payload: data });
       dispatch({ type: USER_LOGIN_SUCCESS, payload: data });
-  
       localStorage.setItem("userInfo", JSON.stringify(data));
     } catch (error) {
       console.log(error)
@@ -107,7 +101,7 @@ import { Navigate } from 'react-router-dom';
         },
       };
   
-      const { data } = await axios.get(`/api/users/${id}`, config);
+      const { data } = await axios.get(`/api/readCustomer/${id}`, config);
       dispatch({ type: USER_DETAILS_SUCCESS, payload: data });
     } catch (error) {
       const message =
@@ -140,7 +134,7 @@ import { Navigate } from 'react-router-dom';
         },
       };
   
-      const { data } = await axios.put(`/api/users/profile`, user, config);
+      const { data } = await axios.put(`/api/users/customer`, user, config);
       dispatch({ type: USER_UPDATE_PROFILE_SUCCESS, payload: data });
       dispatch({ type: USER_LOGIN_SUCCESS, payload: data });
   

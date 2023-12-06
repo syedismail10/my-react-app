@@ -31,14 +31,14 @@ const ShopSection = () => {
                     <Link to={`/products/${product._id}`}>
                       <div className='shopBack'>
                         {/* Use the image path directly */}
-                        <img src={product.image} alt={product.name} />
+                        <img src={`http://localhost:8081/images/`+ product.image} alt={product.name} />
                       </div>
                     </Link>
                     <div className='shoptext'>
                       <p><Link to={`/products/${product._id}`}>{product.name}</Link></p>
                       <h2>Item Description</h2>
                       <p>{product.description}</p>
-                      <h3>${product.price}</h3>
+                      <h3>{product.price}/-</h3>
                     </div>
                   </div>
                 </div>
