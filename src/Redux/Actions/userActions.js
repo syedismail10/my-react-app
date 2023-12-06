@@ -16,8 +16,7 @@ import {
   } from '../Constants/UserConstants.js'
   import axios from "axios";
   import { ORDER_LIST_MY_RESET } from "../Constants/OrderConstants.js";
-  import Login from '../../screens/Login.js';
-import { Navigate } from 'react-router-dom';
+
   
   // LOGIN
   export const login = (email, password) => async (dispatch) => {

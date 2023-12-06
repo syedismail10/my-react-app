@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../Redux/Actions/userActions";
 import logo from '../images/shoes-store.png';
-
+import Dropdown from 'react-bootstrap/Dropdown'
 
 const Header = () => {
   const [keyword, setKeyword] = useState();
@@ -154,30 +154,23 @@ console.log(userInfo)
                   </button>
                 </form>
               </div>
-              <div className="col-md-3 d-flex align-items-center justify-content-end Login-Register">
-                {userInfo.user.name ? (
-                  <div className="dropdown">
-                    <button
-                      type="button"
-                      className="btn btn-secondary dropdown-toggle"
-                      data-bs-toggle="dropdown"
-                      aria-expanded="false"
-                    >
-                      Hi, {userInfo.user.name}
-                    </button>
-                    <ul className="dropdown-menu">
-                      <li>
-                      <Link className="dropdown-item" to="/profile">Go to profile</Link>
-                      </li>
-                      <li>
-                        <Link className="dropdown-item" to="#" onClick={logoutHandler}>Logout</Link> 
-                      </li>
-                  </ul>
-                  </div>
+              <div className="col-md-3 d-flex align-items-center justify-content-end ">
+                {userInfo ? (
+                      <Dropdown>
+                        <Dropdown.Toggle variant="success" id="dropdown-basic">
+                          Hi , {userInfo.user.name}
+                        </Dropdown.Toggle>
+                        <Dropdown.Menu>
+                          <Dropdown.Item as={Link} to="/profile">Go to profile</Dropdown.Item>
+                          <Dropdown.Item as={Link} to='/#'>Logout</Dropdown.Item>
+                        </Dropdown.Menu>
+                      </Dropdown>
                 ) : (
                   <>
-                    <Link to="/register" className="dropdown-item-text">Register</Link>
-                    <Link to="/login" className="dropdown-item-text">Login</Link>
+                    <div className="container">
+                    <Link to="/register" className="col p-3">Register</Link>
+                    <Link to="/login" className="col p-3">Login</Link>
+                    </div>
                   </>
                 )}
 

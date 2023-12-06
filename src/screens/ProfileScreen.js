@@ -6,10 +6,11 @@ import { getUserDetails } from "../Redux/Actions/userActions";
 import Orders from "./../components/profileComponents/Orders";
 import moment from "moment";
 import { listMyOrders } from "../Redux/Actions/OrderActions";
-
+import { useNavigate } from "react-router-dom";
+import { redirect} from 'react-router-dom'
 const ProfileScreen = () => {
   window.scrollTo(0, 0);
-
+  const navigate = useNavigate()
   const dispatch = useDispatch();
 
   const userLogin = useSelector((state) => state.userLogin);
@@ -17,7 +18,12 @@ const ProfileScreen = () => {
   const orderListMy = useSelector((state) => state.orderListMy);
   const { loading, error, orders } = orderListMy;
 
+
   useEffect(() => {
+    const {user} = userLogin;
+    if (!user) {
+      redirect('/login')
+    }
     dispatch(listMyOrders());
     dispatch(getUserDetails("profile"));
   }, [dispatch]);
@@ -32,7 +38,7 @@ const ProfileScreen = () => {
               <div className="author-card-cover"></div>
               <div className="author-card-profile row">
                 <div className="author-card-avatar col-md-5">
-                  <img src="./images/user.png" alt="userprofileimage" />
+                  <img src="../images/donwload(1).png" alt="userprofileimage" />
                 </div>
                 <div className="author-card-details col-md-7">
                   <h5 className="author-card-name mb-2">

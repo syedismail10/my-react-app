@@ -1,13 +1,13 @@
 @media (max-width: 991.98px) {
-    .display-none {
+    /* .display-none {
       display: none !important;
-    }
+    } */
     .search-button {
       font-size: 10px;
     }
-    .Login-Register a {
+    /* .Login-Register a {
       font-size: 10px;
-    }
+    } */
     .btn-group button {
       font-size: 13px;
     }
