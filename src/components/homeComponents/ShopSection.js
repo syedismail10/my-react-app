@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import Pagination from './pagination';
 import axios from 'axios';
 
 const ShopSection = () => {
   const [products, setProducts] = useState([]);
-
   useEffect(() => {
     const fetchproducts = async () => {
       try {
