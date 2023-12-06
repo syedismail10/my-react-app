@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Header from "./../components/Header";
 import Rating from "../components/homeComponents/Rating";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import Message from "./../components/LoadingError/Error";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -12,37 +12,40 @@ import Loading from "../components/LoadingError/Loading";
 import { PRODUCT_CREATE_REVIEW_RESET } from "../Redux/Constants/ProductConstants";
 import moment from "moment";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const SingleProduct = ({match}) => {
+  const {id} = useParams()
   const [qty, setQty] = useState(1);
+  const [product, setProduct] = useState({});
+  console.log(match)
 
+  useEffect(() => {
+    const fetchproducts = async () => {
+      try {
+        const { data } = await axios.get(`http://localhost:8081/api/products/product/${id}`);
+        console.log(data , '!!!!!!!!!!!!!!!')
+        setProduct(data[0]);
+      } catch (error) {
+        console.error('Error fetching products:', error);
+      }
+    };
+    fetchproducts();
+  }, []);
+  
   const history = useNavigate()
-  const productId = match.params.id;
-  console.log(productId)
   const dispatch = useDispatch();
 
   const productDetails = useSelector((state) => state.productDetails);
-  const { loading, error, product } = productDetails;
+    const { loading, error, products } = productDetails;
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
-  const productReviewCreate = useSelector((state) => state.productReviewCreate);
-  const {
-    loading: loadingCreateReview,
-    error: errorCreateReview,
-    success: successCreateReview,
-  } = productReviewCreate;
 
-  useEffect(() => {
-    if (successCreateReview) {
-      alert("Review Submitted");
-      dispatch({ type: PRODUCT_CREATE_REVIEW_RESET });
-    }
-    dispatch(listProductDetails(productId));
-  }, [dispatch, productId, successCreateReview]);
+
 
   const AddToCartHandle = (e) => {
     e.preventDefault();
-    history.push(`/cart/${productId}?qty=${qty}`);
+    // history(`/cart/${productId}?qty=${qty}`);
   };
   return (
     <>
@@ -57,7 +60,7 @@ const SingleProduct = ({match}) => {
             <div className="row">
               <div className="col-md-6">
                 <div className="single-image">
-                  <img src={product.image} alt={product.name} />
+                  <img src={`http://localhost:8081/images/`+ product.image} alt={product.name} />
                 </div>
               </div>
               <div className="col-md-6">
@@ -79,13 +82,6 @@ const SingleProduct = ({match}) => {
                       ) : (
                         <span>unavailable</span>
                       )}
-                    </div>
-                    <div className="flex-box d-flex justify-content-between align-items-center">
-                      <h6>Reviews</h6>
-                      <Rating
-                        value={product.rating}
-                        text={`${product.numReviews} reviews`}
-                      />
                     </div>
                     {product.countInStock > 0 ? (
                       <>
@@ -113,40 +109,6 @@ const SingleProduct = ({match}) => {
                       </>
                     ) : null}
                   </div>
-                </div>
-              </div>
-            </div>
-
-            {/* RATING */}
-            <div className="row my-5">
-              <div className="col-md-6">
-                <h6 className="mb-3">REVIEWS</h6>
-                {product.reviews.length === 0 && (
-                  <Message variant={"alert-info mt-3"}>No Reviews</Message>
-                )}
-                {product.reviews.map((review) => (
-                  <div
-                    key={review._id}
-                    className="mb-5 mb-md-3 bg-light p-3 shadow-sm rounded"
-                  >
-                    <strong>{review.name}</strong>
-                    <Rating value={review.rating} />
-                    <span>{moment(review.createdAt).calendar()}</span>
-                    <div className="alert alert-info mt-3">
-                      {review.comment}
-                    </div>
-                  </div>
-                ))}
-              </div>
-              <div className="col-md-6">
-                <h6>WRITE A CUSTOMER REVIEW</h6>
-                <div className="my-4">
-                  {loadingCreateReview && <Loading />}
-                  {errorCreateReview && (
-                    <Message variant="alert-danger">
-                      {errorCreateReview}
-                    </Message>
-                  )}
                 </div>
               </div>
             </div>

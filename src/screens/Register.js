@@ -35,7 +35,7 @@ const Register = () => {
     e.preventDefault();
     setAmtSpend(0)
     dispatch(register(name, email, password,ph_num,address,city,amt_spend));
-    console.log(userInfo)
+    history('/')
   };
 
   return (
