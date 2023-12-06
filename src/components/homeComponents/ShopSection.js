@@ -11,6 +11,7 @@ const ShopSection = () => {
       try {
         const { data } = await axios.get('http://localhost:8081/api/products/');
         setProducts(data);
+        console.log(data)
       } catch (error) {
         console.error('Error fetching products:', error);
       }
@@ -26,16 +27,16 @@ const ShopSection = () => {
           <div className='col-lg-12 col-md-12 article'>
             <div className='shopcontainer row'>
               {products.map((product) => (
-                <div className='shop col-lg-4 col-md-6 col-sm-6' key={product._id}>
+                <div className='shop col-lg-4 col-md-6 col-sm-6' key={product.product_id}>
                   <div className='border-product'>
-                    <Link to={`/products/${product._id}`}>
+                    <Link to={`/product/${product.product_id}`}>
                       <div className='shopBack'>
                         {/* Use the image path directly */}
                         <img src={`http://localhost:8081/images/`+ product.image} alt={product.name} />
                       </div>
                     </Link>
                     <div className='shoptext'>
-                      <p><Link to={`/products/${product._id}`}>{product.name}</Link></p>
+                      <p><Link to={`/product/${product.product_id}`}>{product.name}</Link></p>
                       <h2>Item Description</h2>
                       <p>{product.description}</p>
                       <h3>{product.price}/-</h3>

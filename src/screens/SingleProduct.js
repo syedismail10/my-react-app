@@ -11,13 +11,14 @@ import {
 import Loading from "../components/LoadingError/Loading";
 import { PRODUCT_CREATE_REVIEW_RESET } from "../Redux/Constants/ProductConstants";
 import moment from "moment";
+import { useNavigate } from "react-router-dom";
 
-const SingleProduct = ({ history, match }) => {
+const SingleProduct = ({match}) => {
   const [qty, setQty] = useState(1);
-  const [rating, setRating] = useState(0);
-  const [comment, setComment] = useState("");
 
+  const history = useNavigate()
   const productId = match.params.id;
+  console.log(productId)
   const dispatch = useDispatch();
 
   const productDetails = useSelector((state) => state.productDetails);
@@ -34,8 +35,6 @@ const SingleProduct = ({ history, match }) => {
   useEffect(() => {
     if (successCreateReview) {
       alert("Review Submitted");
-      setRating(0);
-      setComment("");
       dispatch({ type: PRODUCT_CREATE_REVIEW_RESET });
     }
     dispatch(listProductDetails(productId));
@@ -44,15 +43,6 @@ const SingleProduct = ({ history, match }) => {
   const AddToCartHandle = (e) => {
     e.preventDefault();
     history.push(`/cart/${productId}?qty=${qty}`);
-  };
-  const submitHandler = (e) => {
-    e.preventDefault();
-    dispatch(
-      createProductReview(productId, {
-        rating,
-        comment,
-      })
-    );
   };
   return (
     <>
@@ -158,52 +148,6 @@ const SingleProduct = ({ history, match }) => {
                     </Message>
                   )}
                 </div>
-                {userInfo ? (
-                  <form onSubmit={submitHandler}>
-                    <div className="my-4">
-                      <strong>Rating</strong>
-                      <select
-                        value={rating}
-                        onChange={(e) => setRating(e.target.value)}
-                        className="col-12 bg-light p-3 mt-2 border-0 rounded"
-                      >
-                        <option value="">Select...</option>
-                        <option value="1">1 - Poor</option>
-                        <option value="2">2 - Fair</option>
-                        <option value="3">3 - Good</option>
-                        <option value="4">4 - Very Good</option>
-                        <option value="5">5 - Excellent</option>
-                      </select>
-                    </div>
-                    <div className="my-4">
-                      <strong>Comment</strong>
-                      <textarea
-                        row="3"
-                        value={comment}
-                        onChange={(e) => setComment(e.target.value)}
-                        className="col-12 bg-light p-3 mt-2 border-0 rounded"
-                      ></textarea>
-                    </div>
-                    <div className="my-3">
-                      <button
-                        disabled={loadingCreateReview}
-                        className="col-12 bg-black border-0 p-3 rounded text-white"
-                      >
-                        SUBMIT
-                      </button>
-                    </div>
-                  </form>
-                ) : (
-                  <div className="my-3">
-                    <Message variant={"alert-warning"}>
-                      Please{" "}
-                      <Link to="/login">
-                        " <strong>Login</strong> "
-                      </Link>{" "}
-                      to write a review{" "}
-                    </Message>
-                  </div>
-                )}
               </div>
             </div>
           </>

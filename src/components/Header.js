@@ -14,7 +14,7 @@ const Header = () => {
   const { cartItems } = cart;
   const userLogin = useSelector((state) => state.userLogin);
   let { userInfo } = userLogin;
-  userInfo = false;
+console.log(userInfo)
   const logoutHandler = () => {
     dispatch(logout());
   };
@@ -69,30 +69,24 @@ const Header = () => {
                     <img alt="logo" src={logo} />
                   </Link>
                 </div>
-                <div className="col-6 d-flex align-items-center justify-content-end Login-Register">
+                <div className="d-flex align-items-center justify-content-end">
                   {userInfo ? (
                     <div className="btn-group">
                       <button
                         type="button"
                         className="name-button dropdown-toggle"
-                        data-toggle="dropdown"
-                        aria-haspopup="true"
+                        data-bs-toggle="dropdown"
                         aria-expanded="false"
                       >
                         <i className="fas fa-user"></i>
                       </button>
                       <div className="dropdown-menu">
-                        <Link className="dropdown-item" to="/profile">
-                          Profile
-                        </Link>
-
-                        <Link
-                          className="dropdown-item"
-                          to="#"
-                          onClick={logoutHandler}
-                        >
-                          Logout
-                        </Link>
+                        <li>
+                            <a href="http://localhost:3000/profile"> Go to profile</a>
+                        </li>
+                        <li>
+                            <a href="http://localhost:3000/#">Logout</a> 
+                        </li>
                       </div>
                     </div>
                   ) : (
@@ -107,13 +101,12 @@ const Header = () => {
                         <i className="fas fa-user"></i>
                       </button>
                       <div className="dropdown-menu">
-                        <Link className="dropdown-item" to="/login">
-                          Login
-                        </Link>
-
-                        <Link className="dropdown-item" to="/register">
-                          Register
-                        </Link>
+                        <li>
+                            <a href="http://localhost:3000/profile"> Go to profile</a>
+                        </li>
+                        <li>
+                            <a href="http://localhost:3000/#">Logout</a> 
+                        </li>
                       </div>
                     </div>
                   )}
@@ -162,30 +155,24 @@ const Header = () => {
                 </form>
               </div>
               <div className="col-md-3 d-flex align-items-center justify-content-end Login-Register">
-                {userInfo ? (
-                  <div className="btn-group">
+                {userInfo.user.name ? (
+                  <div className="dropdown">
                     <button
                       type="button"
-                      className="name-button dropdown-toggle"
-                      data-toggle="dropdown"
-                      aria-haspopup="true"
+                      className="btn btn-secondary dropdown-toggle"
+                      data-bs-toggle="dropdown"
                       aria-expanded="false"
                     >
-                      Hi, {userInfo.name}
+                      Hi, {userInfo.user.name}
                     </button>
-                    <div className="dropdown-menu">
-                      <Link className="dropdown-item" to="/profile">
-                        Profile
-                      </Link>
-
-                      <Link
-                        className="dropdown-item"
-                        to="#"
-                        onClick={logoutHandler}
-                      >
-                        Logout
-                      </Link>
-                    </div>
+                    <ul className="dropdown-menu">
+                      <li>
+                      <Link className="dropdown-item" to="/profile">Go to profile</Link>
+                      </li>
+                      <li>
+                        <Link className="dropdown-item" to="#" onClick={logoutHandler}>Logout</Link> 
+                      </li>
+                  </ul>
                   </div>
                 ) : (
                   <>

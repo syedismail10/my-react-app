@@ -27,6 +27,10 @@ const Login = () => {
   const submitHandler = (e) => {
     e.preventDefault();
     dispatch(login(email, password));
+    if (userInfo){
+      alert('login sucessful')
+      history('/')
+    }
   };
 
   return (
