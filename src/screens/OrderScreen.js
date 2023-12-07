@@ -10,10 +10,10 @@ import moment from "moment";
 import axios from "axios";
 import { ORDER_PAY_RESET } from "../Redux/Constants/OrderConstants";
 
-const OrderScreen = ({ match }) => {
+const OrderScreen = () => {
   window.scrollTo(0, 0);
   const [sdkReady, setSdkReady] = useState(false);
-  const orderId = match.params.id;
+  // const orderId = match.params.id;
   const dispatch = useDispatch();
 
   const orderDetails = useSelector((state) => state.orderDetails);

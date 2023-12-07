@@ -4,27 +4,20 @@ import Rating from "../components/homeComponents/Rating";
 import { Link, useParams } from "react-router-dom";
 import Message from "./../components/LoadingError/Error";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  createProductReview,
-  listProductDetails,
-} from "../Redux/Actions/ProductActions";
 import Loading from "../components/LoadingError/Loading";
-import { PRODUCT_CREATE_REVIEW_RESET } from "../Redux/Constants/ProductConstants";
-import moment from "moment";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
-const SingleProduct = ({match}) => {
+const SingleProduct = () => {
   const {id} = useParams()
   const [qty, setQty] = useState(1);
   const [product, setProduct] = useState({});
-  console.log(match)
+  
 
   useEffect(() => {
     const fetchproducts = async () => {
       try {
         const { data } = await axios.get(`http://localhost:8081/api/products/product/${id}`);
-        console.log(data , '!!!!!!!!!!!!!!!')
         setProduct(data[0]);
       } catch (error) {
         console.error('Error fetching products:', error);
@@ -45,7 +38,7 @@ const SingleProduct = ({match}) => {
 
   const AddToCartHandle = (e) => {
     e.preventDefault();
-    // history(`/cart/${productId}?qty=${qty}`);
+    history(`/cart/${product.product_id}?qty=${qty}`);
   };
   return (
     <>
@@ -73,17 +66,17 @@ const SingleProduct = ({match}) => {
                   <div className="product-count col-lg-7 ">
                     <div className="flex-box d-flex justify-content-between align-items-center">
                       <h6>Price</h6>
-                      <span>${product.price}</span>
+                      <span>{product.price}/-</span>
                     </div>
                     <div className="flex-box d-flex justify-content-between align-items-center">
                       <h6>Status</h6>
-                      {product.countInStock > 0 ? (
+                      {product.quantity > 0 ? (
                         <span>In Stock</span>
                       ) : (
                         <span>unavailable</span>
                       )}
                     </div>
-                    {product.countInStock > 0 ? (
+                    {product.quantity > 0 ? (
                       <>
                         <div className="flex-box d-flex justify-content-between align-items-center">
                           <h6>Quantity</h6>
@@ -91,7 +84,7 @@ const SingleProduct = ({match}) => {
                             value={qty}
                             onChange={(e) => setQty(e.target.value)}
                           >
-                            {[...Array(product.countInStock).keys()].map(
+                            {[...Array(product.quantity).keys()].map(
                               (x) => (
                                 <option key={x + 1} value={x + 1}>
                                   {x + 1}

@@ -17,6 +17,8 @@ import {
   import axios from "axios";
   import { ORDER_LIST_MY_RESET } from "../Constants/OrderConstants.js";
 
+  import { CART_CLEAR_ITEMS } from '../Constants/CartConstants.js';
+
   
   // LOGIN
   export const login = (email, password) => async (dispatch) => {
@@ -51,6 +53,7 @@ import {
   // LOGOUT working
   export const logout = () => (dispatch) => {
     localStorage.removeItem("userInfo");
+    dispatch({ type : CART_CLEAR_ITEMS});
     dispatch({ type: USER_LOGOUT });
     dispatch({ type: USER_DETAILS_RESET });
     dispatch({ type: ORDER_LIST_MY_RESET });

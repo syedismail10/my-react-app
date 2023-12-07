@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { logout } from "../Redux/Actions/userActions";
+import { login, logout } from "../Redux/Actions/userActions";
 import logo from '../images/shoes-store.png';
 import Dropdown from 'react-bootstrap/Dropdown'
 
@@ -14,7 +14,6 @@ const Header = () => {
   const { cartItems } = cart;
   const userLogin = useSelector((state) => state.userLogin);
   let { userInfo } = userLogin;
-console.log(userInfo)
   const logoutHandler = () => {
     dispatch(logout());
   };
@@ -162,7 +161,7 @@ console.log(userInfo)
                         </Dropdown.Toggle>
                         <Dropdown.Menu>
                           <Dropdown.Item as={Link} to="/profile">Go to profile</Dropdown.Item>
-                          <Dropdown.Item as={Link} to='/#'>Logout</Dropdown.Item>
+                          <Dropdown.Item as={Link} to='/#' onClickCapture= {logoutHandler}>Logout</Dropdown.Item>
                         </Dropdown.Menu>
                       </Dropdown>
                 ) : (

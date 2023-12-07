@@ -495,9 +495,9 @@ textarea:focus {
 
 .remove-button {
   background-color: red;
-  width: 25px;
-  height: 25px;
-  border-radius: 100px;
+  width: 2px;
+  height: 6px;
+  border-radius: 25px;
   position: absolute;
   top: -10px;
   left: -10px;
@@ -650,4 +650,7 @@ textarea:focus {
 .page-item.active .page-link {
   background-color: black;
   border: 1px solid black;
+}
+.btn-close{
+  background-color: red;
 }

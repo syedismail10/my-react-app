@@ -3,21 +3,20 @@ import {
   CART_ADD_ITEM,
   CART_REMOVE_ITEM,
   CART_SAVE_PAYMENT_METHOD,
-  CART_SAVE_SHIPPING_ADDRESS,
 } from "../Constants/CartConstants";
 
 // ADD TO CART
 export const addToCart = (id, qty) => async (dispatch, getState) => {
-  const { data } = await axios.get(`/api/products/${id}`);
-
+  const { data } = await axios.get(`http://localhost:8081/api/products/product/${id}`);
+  console.log(data)
   dispatch({
     type: CART_ADD_ITEM,
     payload: {
-      product: data._id,
-      name: data.name,
-      image: data.image,
-      price: data.price,
-      countInStock: data.countInStock,
+      product_id: data[0].product_id,
+      name: data[0].name,
+      image: data[0].image,
+      price: data[0].price,
+      quantity: data[0].quantity,
       qty,
     },
   });
@@ -33,16 +32,6 @@ export const removefromcart = (id) => (dispatch, getState) => {
   });
 
   localStorage.setItem("cartItems", JSON.stringify(getState().cart.cartItems));
-};
-
-// SAVE SHIPPING ADDRESS
-export const saveShippingAddress = (data) => (dispatch) => {
-  dispatch({
-    type: CART_SAVE_SHIPPING_ADDRESS,
-    payload: data,
-  });
-
-  localStorage.setItem("shippingAddress", JSON.stringify(data));
 };
 
 // SAVE PAYMENT METHOD

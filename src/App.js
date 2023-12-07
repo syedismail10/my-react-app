@@ -8,7 +8,6 @@ import SingleProduct from './screens/SingleProduct';
 import Login from './screens/Login';
 import Register from './screens/Register';
 import CartScreen from './screens/CartScreen';
-import ShippingScreen from './screens/ShippingScreen';
 import ProfileScreen from './screens/ProfileScreen';
 import PaymentScreen from './screens/PaymentScreen';
 import PlaceOrderScreen from './screens/PlaceOrderScreen';
@@ -37,11 +36,6 @@ function App() {
           <Route path="/profile" element={
             <PrivateRoute>
               <ProfileScreen />
-            </PrivateRoute>
-          }/>
-          <Route path="/shipping" element={
-            <PrivateRoute>
-              <ShippingScreen />
             </PrivateRoute>
           }/>
           <Route path="/payment" element={
