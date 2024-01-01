@@ -1,12 +1,11 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { createOrder } from "../Redux/Actions/OrderActions";
-import { ORDER_CREATE_RESET } from "../Redux/Constants/OrderConstants";
 import Header from "./../components/Header";
 import Message from "./../components/LoadingError/Error";
 
-const PlaceOrderScreen = ({ history }) => {
+const PlaceOrderScreen = () => {
   window.scrollTo(0, 0);
 
   const dispatch = useDispatch();
@@ -30,15 +29,10 @@ const PlaceOrderScreen = ({ history }) => {
     Number(cart.taxPrice)
   ).toFixed(2);
 
+  const history =  useNavigate()
+
   const orderCreate = useSelector((state) => state.orderCreate);
   const { order, success, error } = orderCreate;
-
-  useEffect(() => {
-    if (success) {
-      history.push(`/order/${order._id}`);
-      dispatch({ type: ORDER_CREATE_RESET });
-    }
-  }, [history, dispatch, success, order]);
 
   const placeOrderHandler = () => {
     dispatch(
@@ -87,7 +81,7 @@ const PlaceOrderScreen = ({ history }) => {
                 <h5>
                   <strong>Order info</strong>
                 </h5>
-                <p>Shipping: {cart.shippingAddress.country}</p>
+                <p>Shipping: {userInfo.country}</p>
                 <p>Pay method: {cart.paymentMethod}</p>
               </div>
             </div>

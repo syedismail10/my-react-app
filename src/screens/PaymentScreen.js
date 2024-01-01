@@ -2,16 +2,16 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { savePaymentMethod } from "../Redux/Actions/cartActions";
 import Header from "./../components/Header";
-
-const PaymentScreen = ({ history }) => {
+import { useNavigate } from "react-router-dom";
+const PaymentScreen = () => {
   window.scrollTo(0, 0);
+  const history = useNavigate()
 
   const cart = useSelector((state) => state.cart);
-  const { shippingAddress } = cart;
 
-  if (!shippingAddress) {
-    history.push("/shipping");
-  }
+  const userLogin = useSelector((state) => state.userLogin);
+
+  const {error, loading , userInfo} = userLogin;
 
   const [paymentMethod, setPaymentMethod] = useState("PayPal");
 
@@ -20,7 +20,7 @@ const PaymentScreen = ({ history }) => {
   const submitHandler = (e) => {
     e.preventDefault();
     dispatch(savePaymentMethod(paymentMethod));
-    history.push("/placeorder");
+    history("/placeorder");
   };
   return (
     <>
