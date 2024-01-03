@@ -30,7 +30,7 @@ import {
       case CART_REMOVE_ITEM:
         return {
           ...state,
-          cartItems: state.cartItems.filter((x) => x.product !== action.payload),
+          cartItems: state.cartItems.filter((x) => x.product_id !== action.payload),
         };
       case CART_SAVE_PAYMENT_METHOD:
         return {

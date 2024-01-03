@@ -17,7 +17,6 @@ const PlaceOrderScreen = () => {
   const addDecimals = (num) => {
     return (Math.round(num * 100) / 100).toFixed(2);
   };
-
   cart.itemsPrice = addDecimals(
     cart.cartItems.reduce((acc, item) => acc + item.price * item.qty, 0)
   );
@@ -57,15 +56,15 @@ const PlaceOrderScreen = () => {
             <div className="row ">
               <div className="col-md-4 center">
                 <div className="alert-success order-box">
-                  <i class="fas fa-user"></i>
+                  <i className="fas fa-user"></i>
                 </div>
               </div>
               <div className="col-md-8 center">
                 <h5>
                   <strong>Customer</strong>
                 </h5>
-                <p>{userInfo.name}</p>
-                <p>{userInfo.email}</p>
+                <p>{userInfo.user.name}</p>
+                <p>{userInfo.user.email}</p>
               </div>
             </div>
           </div>
@@ -81,7 +80,7 @@ const PlaceOrderScreen = () => {
                 <h5>
                   <strong>Order info</strong>
                 </h5>
-                <p>Shipping: {userInfo.country}</p>
+                <p>Shipping: {userInfo.user.city}</p>
                 <p>Pay method: {cart.paymentMethod}</p>
               </div>
             </div>
@@ -99,9 +98,8 @@ const PlaceOrderScreen = () => {
                   <strong>Deliver to</strong>
                 </h5>
                 <p>
-                  Address: {cart.shippingAddress.city},{" "}
-                  {cart.shippingAddress.address},{" "}
-                  {cart.shippingAddress.postalCode}
+                  Address: {userInfo.user.address},{" "}
+                  {userInfo.user.city}
                 </p>
               </div>
             </div>
@@ -117,7 +115,7 @@ const PlaceOrderScreen = () => {
                 {cart.cartItems.map((item, index) => (
                   <div className="order-product row" key={index}>
                     <div className="col-md-3 col-6">
-                      <img src={item.image} alt={item.name} />
+                      <img src={`http://localhost:8081/images/`+ item.image} alt={item.name} />
                     </div>
                     <div className="col-md-5 col-6 d-flex align-items-center">
                       <Link to={`/products/${item.product}`}>

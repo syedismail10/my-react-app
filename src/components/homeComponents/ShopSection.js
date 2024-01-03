@@ -1,21 +1,25 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useParams, useSearchParams } from 'react-router-dom';
 import Pagination from './pagination';
 import axios from 'axios';
 
 const ShopSection = () => {
   const [products, setProducts] = useState([]);
+  const [searchParams, setSearchParams] = useSearchParams()
+  const search =  searchParams.get('searchitem')
+  console.log(search)
   useEffect(() => {
     const fetchproducts = async () => {
       try {
         const { data } = await axios.get('http://localhost:8081/api/products/');
         setProducts(data);
-        console.log(data)
       } catch (error) {
         console.error('Error fetching products:', error);
       }
     };
-
+    if(search){
+      
+    }
     fetchproducts();
   }, []); // Removed unnecessary dependencies from the dependency array
 
@@ -28,7 +32,7 @@ const ShopSection = () => {
               {products.map((product) => (
                 <div className='shop col-lg-4 col-md-6 col-sm-6' key={product.product_id}>
                   <div className='border-product'>
-                    <Link to={`/product/${product.product_id}`}>
+                    <Link to={`/products/${product.product_id}`}>
                       <div className='shopBack'>
                         {/* Use the image path directly */}
                         <img src={`http://localhost:8081/images/`+ product.image} alt={product.name} />

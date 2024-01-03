@@ -12,6 +12,8 @@ import { ORDER_PAY_RESET } from "../Redux/Constants/OrderConstants";
 
 const OrderScreen = () => {
   window.scrollTo(0, 0);
+  const userLogin = useSelector((state) => state.userLogin)
+  const {userInfo} = userLogin;
   const [sdkReady, setSdkReady] = useState(false);
   // const orderId = match.params.id;
   const dispatch = useDispatch();
@@ -31,33 +33,33 @@ const OrderScreen = () => {
     );
   }
 
-  useEffect(() => {
-    const addPayPalScript = async () => {
-      const { data: clientId } = await axios.get("/api/config/paypal");
-      const script = document.createElement("script");
-      script.type = "text/javascript";
-      script.src = `https://www.paypal.com/sdk/js?client-id=${clientId}`;
-      script.async = true;
-      script.onload = () => {
-        setSdkReady(true);
-      };
-      document.body.appendChild(script);
-    };
-    if (!order || successPay) {
-      dispatch({ type: ORDER_PAY_RESET });
-      dispatch(getOrderDetails(orderId));
-    } else if (!order.isPaid) {
-      if (!window.paypal) {
-        addPayPalScript();
-      } else {
-        setSdkReady(true);
-      }
-    }
-  }, [dispatch, orderId, successPay, order]);
+  // useEffect(() => {
+  //   const addPayPalScript = async () => {
+  //     const { data: clientId } = await axios.get("/api/config/paypal");
+  //     const script = document.createElement("script");
+  //     script.type = "text/javascript";
+  //     script.src = `https://www.paypal.com/sdk/js?client-id=${clientId}`;
+  //     script.async = true;
+  //     script.onload = () => {
+  //       setSdkReady(true);
+  //     };
+  //     document.body.appendChild(script);
+  //   };
+  //   if (!order || successPay) {
+  //     dispatch({ type: ORDER_PAY_RESET });
+  //     dispatch(getOrderDetails(orderId));
+  //   } else if (!order.isPaid) {
+  //     if (!window.paypal) {
+  //       addPayPalScript();
+  //     } else {
+  //       setSdkReady(true);
+  //     }
+  //   }
+  // }, [dispatch, orderId, successPay, order]);
 
-  const successPaymentHandler = (paymentResult) => {
-    dispatch(payOrder(orderId, paymentResult));
-  };
+  // const successPaymentHandler = (paymentResult) => {
+  //   dispatch(payOrder(orderId, paymentResult));
+  // };
 
   return (
     <>
@@ -81,10 +83,10 @@ const OrderScreen = () => {
                     <h5>
                       <strong>Customer</strong>
                     </h5>
-                    <p>{order.user.name}</p>
+                    <p>{userInfo.user.name}</p>
                     <p>
-                      <a href={`mailto:${order.user.email}`}>
-                        {order.user.email}
+                      <a href={`mailto:${userInfo.user.email}`}>
+                        {userInfo.user.email}
                       </a>
                     </p>
                   </div>
@@ -166,7 +168,7 @@ const OrderScreen = () => {
                     {order.orderItems.map((item, index) => (
                       <div className="order-product row" key={index}>
                         <div className="col-md-3 col-6">
-                          <img src={item.image} alt={item.name} />
+                          <img src={`http://localhost:8081/images/`+ item.image} alt={item.name} />
                         </div>
                         <div className="col-md-5 col-6 d-flex align-items-center">
                           <Link to={`/products/${item.product}`}>

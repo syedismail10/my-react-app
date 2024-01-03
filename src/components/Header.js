@@ -6,7 +6,7 @@ import logo from '../images/shoes-store.png';
 import Dropdown from 'react-bootstrap/Dropdown'
 
 const Header = () => {
-  const [keyword, setKeyword] = useState();
+  const [keyword, setKeyword] = useState('');
   const dispatch = useDispatch();
   let history = useNavigate();
 
@@ -20,8 +20,8 @@ const Header = () => {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    if (keyword.trim()) {
-      history(`/search/${keyword}`);
+    if (keyword) {
+      history(`/?searchitem=${keyword}`);
     } else {
       history("/");
     }
@@ -153,9 +153,9 @@ const Header = () => {
                   </button>
                 </form>
               </div>
-              <div className="col-md-3 d-flex align-items-center justify-content-end ">
+              <div className="col-md-3 d-flex align-items-center justify-content-center">
                 {userInfo ? (
-                      <Dropdown>
+                      <Dropdown style={{marginRight : '10px'}}>
                         <Dropdown.Toggle variant="success" id="dropdown-basic">
                           Hi , {userInfo.user.name}
                         </Dropdown.Toggle>
@@ -166,16 +166,14 @@ const Header = () => {
                       </Dropdown>
                 ) : (
                   <>
-                    <div className="container">
                     <Link to="/register" className="col p-3">Register</Link>
                     <Link to="/login" className="col p-3">Login</Link>
-                    </div>
                   </>
                 )}
 
-                <Link to="/cart">
-                  <i className="fas fa-shopping-bag"></i>
-                  <span className="badge">{cartItems.length}</span>
+                <Link to="/cart"  style={{ marginLeft: '10px' }}>
+                  <i className="fas fa-shopping-bag" style={{ marginRight:'3px'}}></i>
+                  <span className="badge" style={{ fontSize: '10px', borderRadius: '10px'}}>{cartItems.length}</span>
                 </Link>
               </div>
             </div>

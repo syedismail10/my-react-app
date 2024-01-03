@@ -25,7 +25,7 @@ function App() {
           <Route path="/search/:keyword" element={<HomeScreen />} />
           <Route path="/page/:pagenumber" element={<HomeScreen />} />
           <Route path="/search/:keyword/page/:pageNumber" element={<HomeScreen />} />
-          <Route path="/product/:id" element={<SingleProduct />} />
+          <Route path="/products/:id" element={<SingleProduct />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/cart/:id?" element={<CartScreen />} />

@@ -32,7 +32,7 @@ import {
         },
       };
   
-      const { data } = await axios.post(`/api/orders`, order, config);
+      const { data } = await axios.post(`http://localhost:8081/api/orders/create`, order, config);
       dispatch({ type: ORDER_CREATE_SUCCESS, payload: data });
       dispatch({ type: CART_CLEAR_ITEMS, payload: data });
   

@@ -9,14 +9,13 @@ const CartScreen = () => {
   const history = useNavigate()
   const {id} = useParams()
   const [searchParams, setSearchParams] = useSearchParams()
-
+  
   const quantity = searchParams.get('qty');
   window.scrollTo(0, 0);
   const dispatch = useDispatch();
 
   const cart = useSelector((state) => state.cart);
   const { cartItems } = cart;
-  
   const total = cartItems.reduce((a, i) => a + i.qty * i.price, 0).toFixed(2);
 
   useEffect(() => {
@@ -58,11 +57,11 @@ const CartScreen = () => {
                 ({cartItems.length})
               </Link>
             </div>
-            {/* cartiterm */}
+            {/* cartitem */}
             {cartItems.map((item) => (
               <div className="cart-iterm row">
                 <div
-                  onClick={() => removeFromCartHandle(item.product)}
+                  onClick={() => removeFromCartHandle(item.product_id)}
                   className="btn-close d-flex
                   flex justify-content-center align-items-center"
                 >
