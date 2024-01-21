@@ -5,6 +5,10 @@ import { createOrder } from "../Redux/Actions/OrderActions";
 import Header from "./../components/Header";
 import Message from "./../components/LoadingError/Error";
 
+function getRndInteger(min,max) {
+  return Math.floor(Math.random() * (max - min)) + min;
+}
+
 const PlaceOrderScreen = () => {
   window.scrollTo(0, 0);
 
@@ -34,8 +38,11 @@ const PlaceOrderScreen = () => {
   const { order, success, error } = orderCreate;
 
   const placeOrderHandler = () => {
+    const orderId = getRndInteger(1,1000)
+    console.log(orderId)
     dispatch(
       createOrder({
+        orderid : orderId,
         orderItems: cart.cartItems,
         shippingAddress: cart.shippingAddress,
         paymentMethod: cart.paymentMethod,

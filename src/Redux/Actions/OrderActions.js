@@ -20,7 +20,7 @@ import {
   export const createOrder = (order) => async (dispatch, getState) => {
     try {
       dispatch({ type: ORDER_CREATE_REQUEST });
-  
+      console.log(order)
       const {
         userLogin: { userInfo },
       } = getState();

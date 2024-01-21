@@ -17,7 +17,7 @@ const SingleProduct = () => {
   useEffect(() => {
     const fetchproducts = async () => {
       try {
-        const { data } = await axios.get(`http://localhost:8081/api/products/${id}`);
+        const { data } = await axios.get(`http://localhost:8081/api/products/search/${id}`);
         setProduct(data[0]);
       } catch (error) {
         console.error('Error fetching products:', error);

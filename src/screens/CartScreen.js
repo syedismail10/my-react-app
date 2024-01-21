@@ -71,7 +71,7 @@ const CartScreen = () => {
                   <img src={`http://localhost:8081/images/`+ item.image} alt={item.name} />
                 </div>
                 <div className="cart-text col-md-5 d-flex align-items-center">
-                  <Link to={`/products/${item.product}`}>
+                  <Link to={`/products/${item.product_id}`}>
                     <h4>{item.name}</h4>
                   </Link>
                 </div>
